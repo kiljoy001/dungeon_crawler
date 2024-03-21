@@ -8,6 +8,8 @@ class Entity:
     and dialogue are required. Dynamic dialogue is provided by the load dialogue method. """
 
     def __init__(self, properties: dict):
+        self.stats = {}
+        self.name = properties.get("name", "Unknown")
         self.can_talk = properties.get("can_Talk", False)
         self.dialogue = properties.get("dialogue", None)
         for key, value in properties.items():
@@ -39,6 +41,7 @@ class Entity:
             else:
                 return "Dialogue function does not exist!"
         return dialogue_entry
+
     @classmethod
     def load_item_from_yaml(cls, yaml_file_location):
         with open(yaml_file_location, 'r') as file:
