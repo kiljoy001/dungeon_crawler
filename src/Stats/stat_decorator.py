@@ -23,3 +23,8 @@ class StatDecorator:
                 additional_damage = stat_value * (modifier_percentage / 100)
                 if 'damage' in kwargs:
                     original_damage = kwargs['damage']
+                    updated_damage = original_damage + additional_damage
+                    kwargs['damage'] = updated_damage
+                    return func(entity, *args, **kwargs)
+            return wrapper
+        return decorator

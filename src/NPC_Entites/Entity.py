@@ -2,7 +2,6 @@ import os.path
 import random
 import yaml
 
-
 class Entity:
     """Basic Game Entity. Allows for yaml defined attributes and properties, two properties can_talk
     and dialogue are required. Dynamic dialogue is provided by the load dialogue method. """
@@ -22,6 +21,10 @@ class Entity:
                 setattr(self, key, value)
 
     def load_dialogue(self, dialogue_key: str, context=None) -> str:
+        """
+        Loads dialogue from yaml files, allows for branching options.
+        Takes a key string, and an optional context value
+        """
         if not self.can_talk:
             return "It cannot speak!"
 
@@ -44,6 +47,9 @@ class Entity:
 
     @classmethod
     def load_item_from_yaml(cls, yaml_file_location):
+        """
+        Loads yaml files
+        """
         with open(yaml_file_location, 'r') as file:
             item_data = yaml.safe_load(file)
             return [Entity(properties=item) for item in item_data]
